@@ -1,0 +1,48 @@
+---
+root: true
+
+env:
+  browser: true
+  node: true
+  es6: true
+  jest: true
+
+parser: babel-eslint
+
+plugins:
+- react
+- jsx-a11y
+- import
+
+extends:
+- eslint:recommended
+- plugin:react/recommended
+- plugin:jsx-a11y/recommended
+- plugin:import/errors
+- plugin:import/warnings
+
+parserOptions:
+  sourceType: module
+  ecmaVersion: 2018
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    jsx: true
+
+settings:
+  react:
+    version: 16.7.0-alpha0
+  import/resolver:
+    node:
+      extensions:
+        - .js
+        - .jsx
+  import/ignore:
+  - node_modules
+  - \\.(css|scss|json)$
+
+rules:
+  import/extensions:
+  - error
+  - always
+  - js: never
+    jsx: never
