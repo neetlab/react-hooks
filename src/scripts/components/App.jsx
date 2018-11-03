@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Counter } from './Counter';
+import { Context } from '../context';
 
-export class App extends React.PureComponent {
-  state = {
-    count: 0,
-    increase: () => this.setState({ count: this.state.count + 1 }),
-    decrease: () => this.setState({ count: this.state.count - 1 }),
+const reducer = (state, action) => {
+  switch(action.type) {
+    case "INCREASE":
+      return { count: state.count + 1 };
+    case "DECREASE":
+      return { count: state.count - 1 };
+    case "RESET":
+      return { count: 0 };
+    default:
+      return state;
   }
+}
 
-  render () {
-    const Context = React.createContext(this.state);
+export const App = () => {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
 
-    return (
-      <Context.Provider value={this.state}>
-        <Counter context={Context} />
-      </Context.Provider>
-    );
-  }
+  return (
+    <Context.Provider value={{ state, dispatch }}>
+      <Counter />
+    </Context.Provider>
+  );
 }

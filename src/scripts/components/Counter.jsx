@@ -1,18 +1,23 @@
 import React, { useContext } from 'react';
+import { Context } from '../context';
 
-export const Counter = ({ context }) => {
-  const state = useContext(context);
+export const Counter = () => {
+  const { state, dispatch } = useContext(Context);
 
   return (
     <div>
       Counter:
 
-      <button onClick={() => state.increase()}>
+      <button onClick={() => dispatch({ type: 'INCREASE' })}>
         Plus
       </button>
 
-      <button onClick={() => state.decrease()}>
+      <button onClick={() => dispatch({ type: 'DECREASE' })}>
         Minus
+      </button>
+
+      <button onClick={() => dispatch({ type: 'RESET' })}>
+        Reset
       </button>
 
       <span>
